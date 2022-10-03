@@ -56,7 +56,7 @@ async function cs1_claim_rplanet() {
     // );
     console.log("🦁 " + transaction.transaction_id);
     let tx = transaction.transaction_id;
-    // console.log(tx);
+    console.log(tx);
     notify.sendMessage(chat_id2, tx);
     await sleep(5000);
     await cs1_claim_rplanet();
@@ -223,9 +223,9 @@ async function unknown_error() {
   await sleep(5000);
 }
 
-console.log(" rpc  | " + rpc.endpoint);
-
 cs1_claim_rplanet();
+
+console.log(" rpc  | " + rpc.endpoint);
 
 http
   .createServer(function (req, res) {
