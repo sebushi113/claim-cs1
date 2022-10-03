@@ -7,6 +7,14 @@ import moment from "moment";
 import * as dotenv from "dotenv"; // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
 dotenv.config();
 import * as notify from "./notify.js";
+import * as http from "http";
+http
+  .createServer(function (req, res) {
+    // console.log(`Just got a request at ${req.url}!`);
+    res.write("claiming cs1...");
+    res.end();
+  })
+  .listen(process.env.PORT || 3000);
 
 const privateKeys = [process.env.cs1c, process.env.cd3c];
 
@@ -222,16 +230,16 @@ async function unknown_error() {
   await sleep(10000);
 }
 
-// cs1_claim_rplanet();
-// cd3_claim_rplanet();
-// all_claim_greenrabbit();
-
 console.log(" rpc  | " + rpc.endpoint);
 
-cron.schedule("2 * * * *", cs1_claim_rplanet);
-console.log("  🦁   | waiting to claim on min 2...");
-cron.schedule("2 0,2,4,6,8,10,12,14,16,18,20,22 * * *", cd3_claim_rplanet);
-console.log("  🐵   | waiting to claim on min 2 of even hour...");
+// cs1_claim_rplanet();
+// cd3_claim_rplanet();
+all_claim_greenrabbit();
 
-cron.schedule("0 17 * * */1", all_claim_greenrabbit);
-console.log(" 🦁🐵  | waiting to claim at 17:00:00...");
+// cron.schedule("2 * * * *", cs1_claim_rplanet);
+// console.log("  🦁   | waiting to claim on min 2...");
+// cron.schedule("2 0,2,4,6,8,10,12,14,16,18,20,22 * * *", cd3_claim_rplanet);
+// console.log("  🐵   | waiting to claim on min 2 of even hour...");
+
+// cron.schedule("0 17 * * */1", all_claim_greenrabbit);
+// console.log(" 🦁🐵  | waiting to claim at 17:00:00...");
