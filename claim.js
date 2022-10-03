@@ -7,14 +7,14 @@ import moment from "moment";
 import * as dotenv from "dotenv"; // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
 dotenv.config();
 import * as notify from "./notify.js";
-import * as http from "http";
-http
-  .createServer(function (req, res) {
-    // console.log(`Just got a request at ${req.url}!`);
-    res.write("claiming cs1...");
-    res.end();
-  })
-  .listen(process.env.PORT || 3000);
+// import * as http from "http";
+// http
+//   .createServer(function (req, res) {
+//     // console.log(`Just got a request at ${req.url}!`);
+//     res.write("claiming cs1...");
+//     res.end();
+//   })
+//   .listen(process.env.PORT || 3000);
 
 const privateKeys = [process.env.cs1c, process.env.cd3c];
 
