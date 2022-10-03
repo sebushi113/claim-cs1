@@ -222,7 +222,7 @@ async function unknown_error() {
   await sleep(5000);
 }
 
-cs1_claim_rplanet();
+await cs1_claim_rplanet();
 
 console.log(" rpc  | " + rpc.endpoint);
 
