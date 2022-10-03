@@ -222,9 +222,9 @@ async function unknown_error() {
   await sleep(5000);
 }
 
-await cs1_claim_rplanet();
+cs1_claim_rplanet();
 
-console.log(" rpc  | " + rpc.endpoint);
+// console.log(" rpc  | " + rpc.endpoint);
 
 import * as http from "http";
 http
