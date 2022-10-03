@@ -232,9 +232,9 @@ async function unknown_error() {
 
 console.log(" rpc  | " + rpc.endpoint);
 
-// cs1_claim_rplanet();
+cs1_claim_rplanet();
 // cd3_claim_rplanet();
-all_claim_greenrabbit();
+// all_claim_greenrabbit();
 
 // cron.schedule("2 * * * *", cs1_claim_rplanet);
 // console.log("  🦁   | waiting to claim on min 2...");
