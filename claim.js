@@ -224,7 +224,7 @@ async function unknown_error() {
 }
 
 await cs1_claim_rplanet();
-// let claimed = await cs1_claim_rplanet();
+let claimed = await cs1_claim_rplanet();
 
 // console.log(" rpc  | " + rpc.endpoint);
 
@@ -233,7 +233,7 @@ const app = express();
 app.all("/", (req, res) => {
   // console.log("Just got a request!")
   res.send("claiming cs1...");
-  res.send(cs1_claim_rplanet());
+  res.send("claimed" + claimed);
 });
 app.listen(process.env.PORT || 3000);
 
