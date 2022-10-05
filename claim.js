@@ -224,10 +224,10 @@ async function unknown_error() {
   await sleep(5000);
 }
 
-// cs1_claim_rplanet();
-// let claimed = await cs1_claim_rplanet();
+console.log(" rpc  | " + rpc.endpoint);
+cs1_claim_rplanet();
 
-// console.log(" rpc  | " + rpc.endpoint);
+// let claimed = await cs1_claim_rplanet();
 
 // import express from "express";
 // const app = express();
