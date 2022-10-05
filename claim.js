@@ -232,7 +232,7 @@ import express from "express";
 const app = express();
 app.all("/", (req, res) => {
   // console.log("Just got a request!")
-  res.send("claiming cs1...");
+  // res.send("claiming cs1...");
   res.send("claimed" + claimed);
 });
 app.listen(process.env.PORT || 3000);
