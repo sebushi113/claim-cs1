@@ -74,6 +74,7 @@ async function cs1_claim_rplanet() {
       console.log(
         `  🦁   | ${moment(new Date()).format(date)} | unknown error`
       );
+      console.log(error);
       await unknown_error();
       await cs1_claim_rplanet();
     }
@@ -217,13 +218,13 @@ async function api_error() {
 }
 
 async function unknown_error() {
-  console.log(error);
+  // console.log(error);
   let unknown_error_message = "unknown error\ncheck console";
   notify.sendMessage(chat_id, unknown_error_message);
   await sleep(5000);
 }
 
-cs1_claim_rplanet();
+// cs1_claim_rplanet();
 // let claimed = await cs1_claim_rplanet();
 
 // console.log(" rpc  | " + rpc.endpoint);
@@ -243,7 +244,8 @@ http
     // console.log(`Just got a request at ${req.url}!`);
     res.write("claiming cs1...\n");
     // await sleep(20000);
-    res.write("claimed\n" + (await cs1_claim_rplanet()));
+    let claimed = await cs1_claim_rplanet();
+    res.write("claimed\n" + claimed);
     res.end();
   })
   .listen(process.env.PORT || 3000);
