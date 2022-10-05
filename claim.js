@@ -223,19 +223,22 @@ async function unknown_error() {
   await sleep(5000);
 }
 
-await cs1_claim_rplanet();
 // let claimed = await cs1_claim_rplanet();
 
 // console.log(" rpc  | " + rpc.endpoint);
 
 import express from "express";
-const app = express();
-app.all("/", (req, res) => {
-  // console.log("Just got a request!")
-  res.send("claiming cs1...");
-  res.send(cs1_claim_rplanet());
-});
-app.listen(process.env.PORT || 3000);
+async function run() {
+  await cs1_claim_rplanet();
+  const app = express();
+  app.all("/", (req, res) => {
+    // console.log("Just got a request!")
+    res.send("claiming cs1...");
+    res.send(cs1_claim_rplanet());
+  });
+  app.listen(process.env.PORT || 3000);
+}
+run();
 
 // import * as http from "http";
 // http
