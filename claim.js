@@ -224,6 +224,7 @@ async function unknown_error() {
 }
 
 await cs1_claim_rplanet();
+let claimed = await cs1_claim_rplanet();
 
 // console.log(" rpc  | " + rpc.endpoint);
 
@@ -231,8 +232,8 @@ import * as http from "http";
 http
   .createServer(function (req, res) {
     // console.log(`Just got a request at ${req.url}!`);
-    res.write("claiming cs1...");
-    res.write("claimed\n" + cs1_claim_rplanet());
+    res.write("claiming cs1...\n");
+    res.write("claimed\n" + claimed);
     res.end();
   })
   .listen(process.env.PORT || 3000);
