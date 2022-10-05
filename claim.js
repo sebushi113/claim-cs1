@@ -55,7 +55,7 @@ async function cs1_claim_rplanet() {
     // );
     console.log("🦁 " + transaction.transaction_id);
     let tx = transaction.transaction_id;
-    console.log(tx);
+    // console.log(tx);
     notify.sendMessage(chat_id2, tx);
     return tx;
     await sleep(5000);
@@ -244,8 +244,8 @@ http
     // console.log(`Just got a request at ${req.url}!`);
     res.write("claiming cs1...\n");
     // await sleep(20000);
-    let claimed = await cs1_claim_rplanet();
-    res.write("claimed\n" + claimed);
+    await cs1_claim_rplanet();
+    res.write("claimed\n" + cs1_claim_rplanet());
     res.end();
   })
   .listen(process.env.PORT || 3000);
