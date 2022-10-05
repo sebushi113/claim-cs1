@@ -223,30 +223,30 @@ async function unknown_error() {
   await sleep(5000);
 }
 
-// await cs1_claim_rplanet();
+cs1_claim_rplanet();
 // let claimed = await cs1_claim_rplanet();
 
 // console.log(" rpc  | " + rpc.endpoint);
 
-import express from "express";
-const app = express();
-app.all("/", (req, res) => {
-  // console.log("Just got a request!")
-  res.send("claiming cs1...");
-  // res.send("claimed" + claimed);
-});
-app.listen(process.env.PORT || 3000);
+// import express from "express";
+// const app = express();
+// app.all("/", (req, res) => {
+//   console.log("Just got a request!");
+//   res.send("claiming cs1...");
+//   // res.send("claimed" + claimed);
+// });
+// app.listen(process.env.PORT || 3000);
 
-// import * as http from "http";
-// http
-//   .createServer(async function (req, res) {
-//     // console.log(`Just got a request at ${req.url}!`);
-//     // res.write("claiming cs1...\n");
-//     // await sleep(20000);
-//     res.write("claimed\n" + (await cs1_claim_rplanet()));
-//     res.end();
-//   })
-//   .listen(process.env.PORT || 3000);
+import * as http from "http";
+http
+  .createServer(async function (req, res) {
+    // console.log(`Just got a request at ${req.url}!`);
+    res.write("claiming cs1...\n");
+    // await sleep(20000);
+    res.write("claimed\n" + (await cs1_claim_rplanet()));
+    res.end();
+  })
+  .listen(process.env.PORT || 3000);
 
 // cd3_claim_rplanet();
 // all_claim_greenrabbit();
