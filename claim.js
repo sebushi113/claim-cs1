@@ -226,7 +226,7 @@ async function unknown_error() {
 }
 
 console.log(" rpc  | " + rpc.endpoint);
-// cs1_claim_rplanet();
+// console.log(cs1_claim_rplanet());
 
 // let claimed = await cs1_claim_rplanet();
 
@@ -251,22 +251,44 @@ console.log(" rpc  | " + rpc.endpoint);
 //   })
 //   .listen(process.env.PORT || 3000);
 
+// http.get("http://localhost:3000/cs1", function (response) {
+//   // console.log("Status:", response.statusCode);
+//   // console.log("Headers: ", response.headers);
+//   response.pipe(process.stdout);
+// });
+
+// http.get("http://localhost:3000/cd3", function (response) {
+//   // console.log("Status:", response.statusCode);
+//   // console.log("Headers: ", response.headers);
+//   response.pipe(process.stdout);
+// });
+
 import express from "express";
 const app = express();
-app.use(async function (req, res, next) {
-  //do stuff
-  // res.send("claiming cl...");
-  res.write("claiming cl...");
-  await cs1_claim_rplanet();
-  // res.send(cl);
-  // res.send("claimed");
-  next();
-});
-app.all("/", (req, res) => {
+// app.use(async function (req, res, next) {
+//   //do stuff
+//   // res.send("claiming cl...");
+//   res.write("claiming cl...");
+//   await cs1_claim_rplanet();
+//   // res.write(cs1_claim_rplanet());
+//   // res.send("claimed");
+//   // res.send(cl);
+//   // res.send("claimed");
+//   next();
+// });
+app.all("/cs1", async (req, res) => {
   // console.log("Just got a request!");
-  // res.send("claiming cs1...");
+  res.write("claiming cs1...");
+  await cs1_claim_rplanet();
   res.write("claimed");
-  res.write(cs1_claim_rplanet());
+  // res.write(cs1_claim_rplanet());
+});
+app.all("/cd3", async (req, res) => {
+  // console.log("Just got a request!");
+  res.write("claiming cd3...");
+  await cd3_claim_rplanet();
+  res.write("claimed");
+  // res.write(cs1_claim_rplanet());
 });
 app.listen(process.env.PORT || 3000);
 
