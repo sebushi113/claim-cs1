@@ -8,6 +8,7 @@ import * as dotenv from "dotenv"; // see https://github.com/motdotla/dotenv#how-
 dotenv.config();
 import * as notify from "./notify.js";
 import * as http from "http";
+import express from "express";
 
 const privateKeys = [process.env.cs1c, process.env.cd3c];
 
@@ -263,7 +264,6 @@ console.log(" rpc  | " + rpc.endpoint);
 //   response.pipe(process.stdout);
 // });
 
-import express from "express";
 const app = express();
 // app.use(async function (req, res, next) {
 //   //do stuff
