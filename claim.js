@@ -24,9 +24,53 @@ const cs1_perm = process.env.cs1perm;
 const cd3 = process.env.cd3;
 const cd3_perm = process.env.cd3perm;
 
+// var rex = new RegExp("\\\\");
+// var rex = new RegExp("\\)$|^(\\");
+// var rex = /\\/;
 const date = "YYYY-MM-DD HH:mm:ss";
+// const telegram_date = `YYYY\\\\-MM\\-DD HH:mm:ss`;
+// const telegram_date = String.raw`YYYY\\\\\\-MM\\-DD HH:mm:ss`;
+// const telegram_date = "YYYY" + rex + "-MM" + rex + "-DD HH:mm:ss";
+const telegram_date = "YYYY MM DD HH:mm:ss";
+// const year = "YYYY";
+// const month = "MM";
+// const day = "DD";
+// const hour = "HH";
+// const minute = "mm";
+// const second = "ss";
+
+// let tx_message = `
+// ${moment(new Date()).format(
+//   year +
+//     "\\-" +
+//     month +
+//     "\\-" +
+//     day +
+//     " " +
+//     hour +
+//     "\\-" +
+//     minute +
+//     "\\-" +
+//     second
+// )}`;
+
+// console.log(tx_message);
+
 const chat_id = process.env.chat_id;
 const chat_id2 = process.env.chat_id2;
+
+// let date = "2022\\-10\\-06 13:13";
+// let account = "cryptosebus1";
+// let action = "claim";
+// // let tx = "66f21ad13d3fc13518bd2fcbc05ec34fd89d4d2ffdd66b9f9d5b0f0c0a9a634c";
+// let tx = transaction.id;
+
+// let tx_message = `;
+// ${date}
+// ${account}
+// ${action}
+// [view transaction](https://wax.bloks.io/transaction/${tx})
+// `;
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -57,9 +101,82 @@ async function cs1_claim_rplanet() {
     // );
     // console.log("🦁 " + transaction.transaction_id);
     // console.log(tx);
+
     let tx = transaction.transaction_id;
+    console.log("tx");
+    console.log(tx);
+
+    let processed = transaction.processed;
+    // console.log("processed");
+    // console.log(processed);
+    let action_traces = transaction.processed.action_traces;
+    // console.log("action_traces");
+    // console.log(action_traces);
+    let action_traces0 = transaction.processed.action_traces[0];
+    // console.log("action_traces0");
+    // console.log(action_traces0);
+
+    let account_ram_deltas =
+      transaction.processed.action_traces[0].account_ram_deltas[0];
+    // console.log("account_ram_deltas");
+    // console.log(account_ram_deltas);
+    let account_ram_deltas0 =
+      transaction.processed.action_traces[0].account_ram_deltas[0];
+    // console.log("account_ram_deltas0");
+    // console.log(account_ram_deltas0);
+
+    let inline_traces = transaction.processed.action_traces[0].inline_traces[0];
+    // console.log("inline_traces");
+    // console.log(inline_traces);
+    let inline_traces0 =
+      transaction.processed.action_traces[0].inline_traces[0];
+    // console.log("inline_traces0");
+    // console.log(inline_traces0);
+
+    let data = transaction.processed.action_traces[0].inline_traces[0].act.data;
+    // console.log("data");
+    // console.log(data);
+    let data0 =
+      transaction.processed.action_traces[0].inline_traces[0].act.data[0];
+    // console.log("data0");
+    // console.log(data0);
+
+    let from =
+      transaction.processed.action_traces[0].inline_traces[0].act.data.from;
+    // console.log("from");
+    // console.log(from);
+    let to =
+      transaction.processed.action_traces[0].inline_traces[0].act.data.to;
+    // console.log("to");
+    // console.log(to);
+    let action =
+      transaction.processed.action_traces[0].inline_traces[0].act.name;
+    // console.log("action");
+    // console.log(action);
+    let quantity =
+      transaction.processed.action_traces[0].inline_traces[0].act.data.quantity;
+    // console.log("quantity");
+    // console.log(quantity);
+    // let tx = "66f21ad13d3fc13518bd2fcbc05ec34fd89d4d2ffdd66b9f9d5b0f0c0a9a634c";
+    // let tx = transaction.id;
+
+    // from: ${from}
+    // quantity: ${quantity}
+
+    let tx_message = `
+    ${moment(new Date()).format(telegram_date)} 
+
+    to: ${to}
+    action: ${action}
+
+    [view transaction](https://wax.bloks.io/transaction/${tx})`;
+
+    // console.log("tx_message");
+    // console.log(tx_message);
+
     console.log("🦁 " + tx);
-    notify.sendMessage(chat_id2, "🦁 \\| " + tx);
+    notify.sendMessage(chat_id2, tx_message);
+
     // return tx;
     await sleep(5000);
     await cs1_claim_rplanet();
@@ -110,8 +227,80 @@ async function cd3_claim_rplanet() {
     //   }`
     // );
     let tx = transaction.transaction_id;
-    console.log("🐵 " + tx);
-    notify.sendMessage(chat_id2, "🐵 \\| " + tx);
+    console.log("tx");
+    console.log(tx);
+
+    let processed = transaction.processed;
+    // console.log("processed");
+    // console.log(processed);
+    let action_traces = transaction.processed.action_traces;
+    // console.log("action_traces");
+    // console.log(action_traces);
+    let action_traces0 = transaction.processed.action_traces[0];
+    // console.log("action_traces0");
+    // console.log(action_traces0);
+
+    let account_ram_deltas =
+      transaction.processed.action_traces[0].account_ram_deltas[0];
+    // console.log("account_ram_deltas");
+    // console.log(account_ram_deltas);
+    let account_ram_deltas0 =
+      transaction.processed.action_traces[0].account_ram_deltas[0];
+    // console.log("account_ram_deltas0");
+    // console.log(account_ram_deltas0);
+
+    let inline_traces = transaction.processed.action_traces[0].inline_traces[0];
+    // console.log("inline_traces");
+    // console.log(inline_traces);
+    let inline_traces0 =
+      transaction.processed.action_traces[0].inline_traces[0];
+    // console.log("inline_traces0");
+    // console.log(inline_traces0);
+
+    let data = transaction.processed.action_traces[0].inline_traces[0].act.data;
+    // console.log("data");
+    // console.log(data);
+    let data0 =
+      transaction.processed.action_traces[0].inline_traces[0].act.data[0];
+    // console.log("data0");
+    // console.log(data0);
+
+    let from =
+      transaction.processed.action_traces[0].inline_traces[0].act.data.from;
+    // console.log("from");
+    // console.log(from);
+    let to =
+      transaction.processed.action_traces[0].inline_traces[0].act.data.to;
+    // console.log("to");
+    // console.log(to);
+    let action =
+      transaction.processed.action_traces[0].inline_traces[0].act.name;
+    // console.log("action");
+    // console.log(action);
+    let quantity =
+      transaction.processed.action_traces[0].inline_traces[0].act.data.quantity;
+    // console.log("quantity");
+    // console.log(quantity);
+    // let tx = "66f21ad13d3fc13518bd2fcbc05ec34fd89d4d2ffdd66b9f9d5b0f0c0a9a634c";
+    // let tx = transaction.id;
+
+    // from: ${from}
+    // quantity: ${quantity}
+
+    let tx_message = `
+    ${moment(new Date()).format(telegram_date)} 
+
+    to: ${to}
+    action: ${action}
+
+    [view transaction](https://wax.bloks.io/transaction/${tx})`;
+
+    // console.log("tx_message");
+    // console.log(tx_message);
+
+    console.log("🦁 " + tx);
+    notify.sendMessage(chat_id2, tx_message);
+
     await sleep(5000);
     await cd3_claim_rplanet();
   } catch (error) {
@@ -225,7 +414,7 @@ async function api_error() {
 }
 
 async function unknown_error() {
-  // console.log(error);
+  console.log(error);
   let unknown_error_message = "unknown error\ncheck console";
   notify.sendMessage(chat_id, unknown_error_message);
   await sleep(5000);
@@ -269,38 +458,42 @@ console.log(" rpc  | " + rpc.endpoint);
 //   response.pipe(process.stdout);
 // });
 
-const app = express();
-// app.use(async function (req, res, next) {
-//   //do stuff
-//   // res.send("claiming cl...");
-//   res.write("claiming cl...");
+// const app = express();
+// // app.use(async function (req, res, next) {
+// //   //do stuff
+// //   // res.send("claiming cl...");
+// //   res.write("claiming cl...");
+// //   await cs1_claim_rplanet();
+// //   // res.write(cs1_claim_rplanet());
+// //   // res.send("claimed");
+// //   // res.send(cl);
+// //   // res.send("claimed");
+// //   next();
+// // });
+// app.all("/cs1", async (req, res) => {
+//   // console.log("Just got a request!");
 //   await cs1_claim_rplanet();
+//   res.send("claiming cs1...");
+//   // res.write("claimed");
+//   // res.end;
 //   // res.write(cs1_claim_rplanet());
-//   // res.send("claimed");
-//   // res.send(cl);
-//   // res.send("claimed");
-//   next();
 // });
-app.all("/cs1", async (req, res) => {
-  // console.log("Just got a request!");
-  await cs1_claim_rplanet();
-  res.send("claiming cs1...");
-  // res.write("claimed");
-  // res.end;
-  // res.write(cs1_claim_rplanet());
-});
-app.all("/cd3", async (req, res) => {
-  // console.log("Just got a request!");
-  await cd3_claim_rplanet();
-  res.send("claiming cd3...");
-  // res.write("claimed");
-  // res.end;
-  // res.write(cd3_claim_rplanet());
-});
-app.listen(process.env.PORT || 3000);
+// app.all("/cd3", async (req, res) => {
+//   // console.log("Just got a request!");
+//   await cd3_claim_rplanet();
+//   res.send("claiming cd3...");
+//   // res.write("claimed");
+//   // res.end;
+//   // res.write(cd3_claim_rplanet());
+// });
+// app.listen(process.env.PORT || 3000);
 
+cs1_claim_rplanet();
 // cd3_claim_rplanet();
 // all_claim_greenrabbit();
+
+// let tx_message = `test\n${moment(new Date()).format(date)}`;
+// console.log(tx_message);
 
 // cron.schedule("2 * * * *", cs1_claim_rplanet);
 // console.log("  🦁   | waiting to claim on min 2...");
