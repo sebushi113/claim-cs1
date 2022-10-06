@@ -48,14 +48,14 @@ async function cs1_claim_rplanet() {
           },
         ],
       },
-      { useLastIrreversible: true, expireSeconds: 300 }
+      { useLastIrreversible: true, expireSeconds: 500 }
     );
     // console.log(
     //   `  🦁   | ${moment(new Date()).format(date)} | ${
     //     transaction.transaction_id
     //   }`
     // );
-    console.log("🦁 " + transaction.transaction_id);
+    // console.log("🦁 " + transaction.transaction_id);
     // console.log(tx);
     let tx = transaction.transaction_id;
     console.log("🦁 " + tx);
@@ -72,6 +72,7 @@ async function cs1_claim_rplanet() {
     ) {
       console.log(`  🦁   | ${moment(new Date()).format(date)} | api error`);
       await api_error();
+      await sleep(3000);
       await cs1_claim_rplanet();
     } else {
       console.log(
@@ -79,6 +80,7 @@ async function cs1_claim_rplanet() {
       );
       console.log(error);
       await unknown_error();
+      await sleep(5000);
       await cs1_claim_rplanet();
     }
   }
@@ -121,12 +123,14 @@ async function cd3_claim_rplanet() {
     ) {
       console.log(`  🐵   | ${moment(new Date()).format(date)} | api error`);
       await api_error();
+      await sleep(5000);
       await cd3_claim_rplanet();
     } else {
       console.log(
         `  🐵   | ${moment(new Date()).format(date)} | unknown error`
       );
       await unknown_error();
+      await sleep(5000);
       await cd3_claim_rplanet();
     }
   }
@@ -291,7 +295,7 @@ app.all("/cd3", async (req, res) => {
   res.send("claiming cd3...");
   // res.write("claimed");
   // res.end;
-  // res.write(cs1_claim_rplanet());
+  // res.write(cd3_claim_rplanet());
 });
 app.listen(process.env.PORT || 3000);
 
