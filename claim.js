@@ -265,29 +265,40 @@ console.log(" rpc  | " + rpc.endpoint);
 
 import express from "express";
 const app = express();
-// app.use("/cs1", async (req, res, next) => {
-//   //do stuff
-//   // res.send("claiming cl...");
-//   res.write("claiming cl...");
-//   await cs1_claim_rplanet();
-//   // res.write(cs1_claim_rplanet());
-//   // res.send("claimed");
-//   // res.send(cl);
-//   // res.send("claimed");
-//   next();
-// });
-app.use("/cs1", async (req, res) => {
-  // console.log("Just got a request!");
+app.use("/cs1", async (req, res, next) => {
+  //do stuff
+  // res.send("claiming cl...");
   res.write("claiming cs1...");
+  await cs1_claim_rplanet();
+  // res.write(cs1_claim_rplanet());
+  // res.send("claimed");
+  // res.send(cl);
+  // res.send("claimed");
+  next();
+});
+app.all("/cs1", async (req, res) => {
+  // console.log("Just got a request!");
+  // res.write("claiming cs1...");
   await cs1_claim_rplanet();
   res.send("claimed");
   // res.write(cs1_claim_rplanet());
 });
-app.use("/cd3", async (req, res) => {
-  // console.log("Just got a request!");
+app.use("/cd3", async (req, res, next) => {
+  //do stuff
+  // res.send("claiming cl...");
   res.write("claiming cd3...");
   await cd3_claim_rplanet();
-  res.send("claimed");
+  // res.write(cs1_claim_rplanet());
+  // res.send("claimed");
+  // res.send(cl);
+  // res.send("claimed");
+  next();
+});
+app.all("/cd3", async (req, res) => {
+  // console.log("Just got a request!");
+  // res.write("claiming cd3...");
+  await cd3_claim_rplanet();
+  res.write("claimed");
   // res.write(cs1_claim_rplanet());
 });
 app.listen(process.env.PORT || 3000);
