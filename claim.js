@@ -255,7 +255,7 @@ import express from "express";
 const app = express();
 app.use(async function (req, res, next) {
   //do stuff
-  res.send("claiming cl...");
+  // res.send("claiming cl...");
   var cl = await claim();
   // res.send(cl);
   // res.send("claimed");
