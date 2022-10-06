@@ -265,7 +265,8 @@ app.use(async function (req, res, next) {
 app.all("/", (req, res) => {
   // console.log("Just got a request!");
   // res.send("claiming cs1...");
-  res.write("claimed | " + cl);
+  res.write("claimed");
+  res.write(cs1_claim_rplanet());
 });
 app.listen(process.env.PORT || 3000);
 
