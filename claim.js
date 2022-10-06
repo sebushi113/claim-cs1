@@ -258,7 +258,7 @@ app.use(async function (req, res, next) {
   res.send("claiming cl...");
   var cl = await claim();
   // res.send(cl);
-  res.send("claimed");
+  // res.send("claimed");
   next();
 });
 app.all("/", (req, res) => {
