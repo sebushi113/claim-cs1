@@ -257,14 +257,14 @@ app.use(async function (req, res, next) {
   //do stuff
   res.send("claiming cl...");
   var cl = await claim();
-  res.send(cl);
-  res.send("claimed: " + cl);
+  // res.send(cl);
+  res.send("claimed");
   next();
 });
 app.all("/", (req, res) => {
   // console.log("Just got a request!");
   res.send("claiming cs1...");
-  res.send("claimed");
+  res.send("claimed | " + cl);
 });
 app.listen(process.env.PORT || 3000);
 
