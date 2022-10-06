@@ -253,11 +253,17 @@ console.log(" rpc  | " + rpc.endpoint);
 
 import express from "express";
 const app = express();
-app.use(async function (req, res, next) {
+app.use(async (req, res, next) => {
   //do stuff
-  res.send("claiming cs1...");
+  // res.send("claiming cs1...");
   await cs1_claim_rplanet();
-  res.send("claimed");
+  // res.send("claimed");
+  next();
+});
+app.all("/", (req, res) => {
+  console.log("Just got a request!");
+  res.send("claiming cs1...");
+  // res.send("claimed" + claimed);
 });
 app.listen(process.env.PORT || 3000);
 
