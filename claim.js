@@ -59,7 +59,7 @@ async function cs1_claim_rplanet() {
     // console.log(tx);
     let tx = transaction.transaction_id;
     console.log("🦁 " + tx);
-    notify.sendMessage(chat_id2, tx);
+    notify.sendMessage(chat_id2, "🦁 | " + tx);
     // return tx;
     await sleep(5000);
     await cs1_claim_rplanet();
@@ -111,7 +111,7 @@ async function cd3_claim_rplanet() {
     // );
     let tx = transaction.transaction_id;
     console.log("🐵 " + tx);
-    notify.sendMessage(chat_id2, tx);
+    notify.sendMessage(chat_id2, "🐵 | " + tx);
     await sleep(5000);
     await cd3_claim_rplanet();
   } catch (error) {
