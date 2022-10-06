@@ -276,14 +276,14 @@ const app = express();
 //   // res.send("claimed");
 //   next();
 // });
-app.all("/cs1", async (req, res) => {
+app.use("/cs1", async (req, res) => {
   // console.log("Just got a request!");
   res.write("claiming cs1...");
   await cs1_claim_rplanet();
   res.send("claimed");
   // res.write(cs1_claim_rplanet());
 });
-app.all("/cd3", async (req, res) => {
+app.use("/cd3", async (req, res) => {
   // console.log("Just got a request!");
   res.write("claiming cd3...");
   await cd3_claim_rplanet();
