@@ -31,7 +31,7 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-var claim = async function cs1_claim_rplanet() {
+async function cs1_claim_rplanet() {
   // while (true) {
   try {
     const transaction = await api.transact(
@@ -81,7 +81,7 @@ var claim = async function cs1_claim_rplanet() {
     }
   }
   // }
-};
+}
 
 async function cd3_claim_rplanet() {
   try {
@@ -256,15 +256,16 @@ const app = express();
 app.use(async function (req, res, next) {
   //do stuff
   // res.send("claiming cl...");
-  var cl = await claim();
+  res.write("claiming cl...");
+  await cs1_claim_rplanet();
   // res.send(cl);
   // res.send("claimed");
   next();
 });
 app.all("/", (req, res) => {
   // console.log("Just got a request!");
-  res.send("claiming cs1...");
-  res.send("claimed | " + cl);
+  // res.send("claiming cs1...");
+  res.write("claimed | " + cl);
 });
 app.listen(process.env.PORT || 3000);
 
