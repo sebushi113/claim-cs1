@@ -226,7 +226,7 @@ async function unknown_error() {
 }
 
 console.log(" rpc  | " + rpc.endpoint);
-cs1_claim_rplanet();
+// cs1_claim_rplanet();
 
 // let claimed = await cs1_claim_rplanet();
 
