@@ -265,7 +265,7 @@ console.log(" rpc  | " + rpc.endpoint);
 
 import express from "express";
 const app = express();
-app.use("/cs1", async (req, res, next) => {
+app.use("/cs1", async function cs1(req, res, next) {
   //do stuff
   // res.send("claiming cl...");
   res.write("claiming cs1...");
@@ -279,11 +279,12 @@ app.use("/cs1", async (req, res, next) => {
 app.all("/cs1", async (req, res) => {
   // console.log("Just got a request!");
   // res.write("claiming cs1...");
-  await cs1_claim_rplanet();
+  // await cs1_claim_rplanet();
   res.send("claimed");
   // res.write(cs1_claim_rplanet());
 });
-app.use("/cd3", async (req, res, next) => {
+
+app.use("/cd3", async function cd3(req, res, next) {
   //do stuff
   // res.send("claiming cl...");
   res.write("claiming cd3...");
@@ -297,7 +298,7 @@ app.use("/cd3", async (req, res, next) => {
 app.all("/cd3", async (req, res) => {
   // console.log("Just got a request!");
   // res.write("claiming cd3...");
-  await cd3_claim_rplanet();
+  // await cd3_claim_rplanet();
   res.write("claimed");
   // res.write(cs1_claim_rplanet());
 });
