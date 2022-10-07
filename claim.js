@@ -163,13 +163,12 @@ async function cs1_claim_rplanet() {
     // from: ${from}
     // quantity: ${quantity}
 
-    let tx_message = `
-    ${moment(new Date()).format(telegram_date)} 
-
+    let tx_message = `${moment(new Date()).format(telegram_date)}
+    
     action: claim
     from: s\.rplanet
     to: ${to}
-
+    
     [view transaction](https://wax.bloks.io/transaction/${tx})`;
 
     // console.log("tx_message");
@@ -288,13 +287,12 @@ async function cd3_claim_rplanet() {
     // from: ${from}
     // quantity: ${quantity}
 
-    let tx_message = `
-    ${moment(new Date()).format(telegram_date)} 
-
+    let tx_message = `${moment(new Date()).format(telegram_date)}
+    
     action: claim
     from: s\.rplanet
     to: ${to}
-
+    
     [view transaction](https://wax.bloks.io/transaction/${tx})`;
 
     // console.log("tx_message");
@@ -433,12 +431,10 @@ async function all_claim_greenrabbit() {
     // from: ${from}
     // quantity: ${quantity}
 
-    let tx_message = `
-    ${moment(new Date()).format(telegram_date)} 
-
+    let tx_message = `${moment(new Date()).format(telegram_date)}
     action: claim
     from: green rabbit
-
+    
     [view transaction](https://wax.bloks.io/transaction/${tx})`;
 
     // console.log("tx_message");
