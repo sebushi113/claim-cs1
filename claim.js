@@ -166,8 +166,9 @@ async function cs1_claim_rplanet() {
     let tx_message = `
     ${moment(new Date()).format(telegram_date)} 
 
+    action: claim
+    from: s\.rplanet
     to: ${to}
-    action: ${action}
 
     [view transaction](https://wax.bloks.io/transaction/${tx})`;
 
@@ -290,8 +291,9 @@ async function cd3_claim_rplanet() {
     let tx_message = `
     ${moment(new Date()).format(telegram_date)} 
 
+    action: claim
+    from: s\.rplanet
     to: ${to}
-    action: ${action}
 
     [view transaction](https://wax.bloks.io/transaction/${tx})`;
 
