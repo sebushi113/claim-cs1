@@ -370,8 +370,83 @@ async function all_claim_greenrabbit() {
     //     transaction.transaction_id
     //   }`
     // );
+
     let tx = transaction.transaction_id;
     console.log("🦁🐵 " + tx);
+    console.log("tx");
+    console.log(tx);
+
+    let processed = transaction.processed;
+    // console.log("processed");
+    // console.log(processed);
+    let action_traces = transaction.processed.action_traces;
+    // console.log("action_traces");
+    // console.log(action_traces);
+    let action_traces0 = transaction.processed.action_traces[0];
+    // console.log("action_traces0");
+    // console.log(action_traces0);
+
+    let account_ram_deltas =
+      transaction.processed.action_traces[0].account_ram_deltas[0];
+    // console.log("account_ram_deltas");
+    // console.log(account_ram_deltas);
+    let account_ram_deltas0 =
+      transaction.processed.action_traces[0].account_ram_deltas[0];
+    // console.log("account_ram_deltas0");
+    // console.log(account_ram_deltas0);
+
+    let inline_traces = transaction.processed.action_traces[0].inline_traces[0];
+    // console.log("inline_traces");
+    // console.log(inline_traces);
+    let inline_traces0 =
+      transaction.processed.action_traces[0].inline_traces[0];
+    // console.log("inline_traces0");
+    // console.log(inline_traces0);
+
+    let data = transaction.processed.action_traces[0].inline_traces[0].act.data;
+    // console.log("data");
+    // console.log(data);
+    let data0 =
+      transaction.processed.action_traces[0].inline_traces[0].act.data[0];
+    // console.log("data0");
+    // console.log(data0);
+
+    let from =
+      transaction.processed.action_traces[0].inline_traces[0].act.data.from;
+    // console.log("from");
+    // console.log(from);
+    let to =
+      transaction.processed.action_traces[0].inline_traces[0].act.data.to;
+    // console.log("to");
+    // console.log(to);
+    let action =
+      transaction.processed.action_traces[0].inline_traces[0].act.name;
+    // console.log("action");
+    // console.log(action);
+    let quantity =
+      transaction.processed.action_traces[0].inline_traces[0].act.data.quantity;
+    // console.log("quantity");
+    // console.log(quantity);
+    // let tx = "66f21ad13d3fc13518bd2fcbc05ec34fd89d4d2ffdd66b9f9d5b0f0c0a9a634c";
+    // let tx = transaction.id;
+
+    // from: ${from}
+    // quantity: ${quantity}
+
+    let tx_message = `
+    ${moment(new Date()).format(telegram_date)} 
+
+    action: claim
+    from: green rabbit
+
+    [view transaction](https://wax.bloks.io/transaction/${tx})`;
+
+    // console.log("tx_message");
+    // console.log(tx_message);
+
+    console.log("🦁 " + tx);
+    notify.sendMessage(chat_id2, tx_message);
+
     notify.sendMessage(chat_id2, tx);
     await sleep(10000);
     await all_claim_greenrabbit();
