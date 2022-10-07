@@ -31,7 +31,7 @@ const date = "YYYY-MM-DD HH:mm:ss";
 // const telegram_date = `YYYY\\\\-MM\\-DD HH:mm:ss`;
 // const telegram_date = String.raw`YYYY\\\\\\-MM\\-DD HH:mm:ss`;
 // const telegram_date = "YYYY" + rex + "-MM" + rex + "-DD HH:mm:ss";
-const telegram_date = "YYYY MM DD HH:mm:ss";
+const telegram_date = "YYYY MM DD  HH:mm:ss";
 // const year = "YYYY";
 // const month = "MM";
 // const day = "DD";
@@ -166,7 +166,7 @@ async function cs1_claim_rplanet() {
     let tx_message = `${moment(new Date()).format(telegram_date)}
     
     action: claim
-    from: s\.rplanet
+    from: s\\.rplanet
     to: ${to}
     
     [view transaction](https://wax.bloks.io/transaction/${tx})`;
@@ -290,7 +290,7 @@ async function cd3_claim_rplanet() {
     let tx_message = `${moment(new Date()).format(telegram_date)}
     
     action: claim
-    from: s\.rplanet
+    from: s\\.rplanet
     to: ${to}
     
     [view transaction](https://wax.bloks.io/transaction/${tx})`;
@@ -531,7 +531,25 @@ console.log(" rpc  | " + rpc.endpoint);
 //   response.pipe(process.stdout);
 // });
 
-// const app = express();
+const app = express();
+app.all("/cs1", async (req, res) => {
+  // console.log("Just got a request!");
+  await cs1_claim_rplanet();
+  res.send("claiming cs1...");
+  // res.write("claimed");
+  // res.end;
+  // res.write(cs1_claim_rplanet());
+});
+app.all("/cd3", async (req, res) => {
+  // console.log("Just got a request!");
+  await cd3_claim_rplanet();
+  res.send("claiming cd3...");
+  // res.write("claimed");
+  // res.end;
+  // res.write(cd3_claim_rplanet());
+});
+app.listen(process.env.PORT || 3000);
+
 // // app.use(async function (req, res, next) {
 // //   //do stuff
 // //   // res.send("claiming cl...");
@@ -543,25 +561,8 @@ console.log(" rpc  | " + rpc.endpoint);
 // //   // res.send("claimed");
 // //   next();
 // // });
-// app.all("/cs1", async (req, res) => {
-//   // console.log("Just got a request!");
-//   await cs1_claim_rplanet();
-//   res.send("claiming cs1...");
-//   // res.write("claimed");
-//   // res.end;
-//   // res.write(cs1_claim_rplanet());
-// });
-// app.all("/cd3", async (req, res) => {
-//   // console.log("Just got a request!");
-//   await cd3_claim_rplanet();
-//   res.send("claiming cd3...");
-//   // res.write("claimed");
-//   // res.end;
-//   // res.write(cd3_claim_rplanet());
-// });
-// app.listen(process.env.PORT || 3000);
 
-cs1_claim_rplanet();
+// cs1_claim_rplanet();
 // cd3_claim_rplanet();
 // all_claim_greenrabbit();
 
