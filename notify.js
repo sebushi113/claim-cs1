@@ -30,7 +30,8 @@ const chat_id2 = process.env.chat_id2;
 
 export async function sendMessage(chat_id, error) {
   await bot.telegram.sendMessage(chat_id, error, {
-    parse_mode: "MarkdownV2",
+    // parse_mode: "MarkdownV2",
+    parse_mode: "HTML",
     disable_web_page_preview: true,
   });
 }

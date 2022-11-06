@@ -6,7 +6,7 @@ import * as cron from "node-cron";
 import moment from "moment";
 import * as dotenv from "dotenv"; // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
 dotenv.config();
-import * as notify from "./notify.js";
+import sendMessage from "./notify.js";
 import * as http from "http";
 import express from "express";
 
@@ -14,9 +14,9 @@ const privateKeys = [process.env.cs1c, process.env.cd3c];
 
 const signatureProvider = new JsSignatureProvider(privateKeys);
 //https://wax.eosio.online/endpoints
-// let rpc = new JsonRpc("https://wax.greymass.com", { fetch }); //required to read blockchain state
+let rpc = new JsonRpc("https://wax.greymass.com", { fetch }); //required to read blockchain state
 // let rpc = new JsonRpc("https://wax.eosusa.news/", { fetch });
-let rpc = new JsonRpc("http://wax.api.eosnation.io/", { fetch });
+// let rpc = new JsonRpc("http://wax.api.eosnation.io/", { fetch });
 let api = new Api({ rpc, signatureProvider }); //required to submit transactions
 
 const cs1 = process.env.cs1;
@@ -24,53 +24,12 @@ const cs1_perm = process.env.cs1perm;
 const cd3 = process.env.cd3;
 const cd3_perm = process.env.cd3perm;
 
-// var rex = new RegExp("\\\\");
-// var rex = new RegExp("\\)$|^(\\");
-// var rex = /\\/;
 const date = "YYYY-MM-DD HH:mm:ss";
-// const telegram_date = `YYYY\\\\-MM\\-DD HH:mm:ss`;
-// const telegram_date = String.raw`YYYY\\\\\\-MM\\-DD HH:mm:ss`;
-// const telegram_date = "YYYY" + rex + "-MM" + rex + "-DD HH:mm:ss";
+
 const telegram_date = "YYYY MM DD  HH:mm:ss";
-// const year = "YYYY";
-// const month = "MM";
-// const day = "DD";
-// const hour = "HH";
-// const minute = "mm";
-// const second = "ss";
-
-// let tx_message = `
-// ${moment(new Date()).format(
-//   year +
-//     "\\-" +
-//     month +
-//     "\\-" +
-//     day +
-//     " " +
-//     hour +
-//     "\\-" +
-//     minute +
-//     "\\-" +
-//     second
-// )}`;
-
-// console.log(tx_message);
 
 const chat_id = process.env.chat_id;
 const chat_id2 = process.env.chat_id2;
-
-// let date = "2022\\-10\\-06 13:13";
-// let account = "cryptosebus1";
-// let action = "claim";
-// // let tx = "66f21ad13d3fc13518bd2fcbc05ec34fd89d4d2ffdd66b9f9d5b0f0c0a9a634c";
-// let tx = transaction.id;
-
-// let tx_message = `;
-// ${date}
-// ${account}
-// ${action}
-// [view transaction](https://wax.bloks.io/transaction/${tx})
-// `;
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -177,7 +136,7 @@ async function cs1_claim_rplanet() {
     // console.log("tx_message");
     // console.log(tx_message);
 
-    notify.sendMessage(chat_id2, tx_message);
+    sendMessage(chat_id2, tx_message);
 
     // return tx;
     await sleep(5000);
@@ -297,7 +256,7 @@ async function cd3_claim_rplanet() {
     // console.log(tx_message);
 
     console.log("🦁 " + tx);
-    notify.sendMessage(chat_id2, tx_message);
+    sendMessage(chat_id2, tx_message);
 
     await sleep(5000);
     await cd3_claim_rplanet();
@@ -357,6 +316,24 @@ async function all_claim_greenrabbit() {
               collection: "greenrabbit",
             },
           },
+          {
+            account: "accounts.gr",
+            name: "withdraw",
+            authorization: [{ actor: cs1, permission: cs1_perm }],
+            data: {
+              user: cs1,
+              quantity: "282504.0000 SHELL",
+            },
+          },
+          {
+            account: "accounts.gr",
+            name: "withdraw",
+            authorization: [{ actor: cd3, permission: cd3_perm }],
+            data: {
+              user: cd3,
+              quantity: "48344.4000 SHELL",
+            },
+          },
         ],
       },
       // { blocksBehind: 3, expireSeconds: 30 }
@@ -368,8 +345,6 @@ async function all_claim_greenrabbit() {
     //   }`
     // );
 
-    let tx = transaction.transaction_id;
-    console.log("🦁🐵 " + tx);
     // console.log("tx");
     // console.log(tx);
 
@@ -430,17 +405,14 @@ async function all_claim_greenrabbit() {
     // // from: ${from}
     // // quantity: ${quantity}
 
-    let tx_message = `${moment(new Date()).format(
-      telegram_date
-    )}\n\naction: claim\nfrom: green rabbit\n\n[view transaction](https://wax.bloks.io/transaction/${tx})`;
-
-    // console.log("tx_message");
-    // console.log(tx_message);
-
-    console.log("🦁 " + tx);
-    notify.sendMessage(chat_id2, tx_message);
-
-    notify.sendMessage(chat_id2, tx);
+    // let tx_message = `${moment(new Date()).format(
+    //   telegram_date
+    // )}\n\naction: claim\nfrom: green rabbit\n\n[view transaction](https://wax.bloks.io/transaction/${tx})`;
+    let tx = transaction.transaction_id;
+    let message = `<b>cyclic</b>\n\naction: claim\n<from: green rabbit\n\n<a href="https://wax.bloks.io/transaction/${tx}">view transaction</a>`;
+    // \n<code>cd3d:  ${cpu4_cd3d}</code>
+    console.log("🦁🐵 " + tx);
+    await sendMessage(chat_id2, message);
     await sleep(10000);
     await all_claim_greenrabbit();
   } catch (error) {
@@ -471,7 +443,7 @@ async function all_claim_greenrabbit() {
 async function successful_tx() {
   let tx = transaction.transaction_id;
   console.log(tx);
-  notify.sendMessage(chat_id2, tx);
+  sendMessage(chat_id2, tx);
 }
 
 async function api_error() {
@@ -480,18 +452,19 @@ async function api_error() {
   console.log("  🔁  | switching api -> " + rpc.endpoint);
   let api_error_message =
     "api error 🔁\nswitching api to: http://wax\\.api\\.eosnation\\.io";
-  notify.sendMessage(chat_id, api_error_message);
+  sendMessage(chat_id, api_error_message);
   await sleep(5000);
 }
 
 async function unknown_error() {
   // console.log(error);
   let unknown_error_message = "unknown error\ncheck console";
-  notify.sendMessage(chat_id, unknown_error_message);
+  sendMessage(chat_id, unknown_error_message);
   await sleep(5000);
 }
 
 console.log(" rpc  | " + rpc.endpoint);
+/*
 // console.log(cs1_claim_rplanet());
 
 // let claimed = await cs1_claim_rplanet();
@@ -528,6 +501,11 @@ console.log(" rpc  | " + rpc.endpoint);
 //   // console.log("Headers: ", response.headers);
 //   response.pipe(process.stdout);
 // });
+*/
+
+// cs1_claim_rplanet();
+// cd3_claim_rplanet();
+// all_claim_greenrabbit();
 
 const app = express();
 app.all("/cs1", async (req, res) => {
@@ -547,9 +525,13 @@ app.all("/cd3", async (req, res) => {
   // res.write(cd3_claim_rplanet());
 });
 app.all("/gr", async (req, res) => {
-  // console.log("Just got a request!");
+  console.time("GR");
+  console.log(moment(new Date()).format(date) + " | GR started");
+  // res.send("claiming green rabbit...");
   await all_claim_greenrabbit();
-  res.send("claiming green rabbit...");
+  console.log(moment(new Date()).format(date) + " | GR finished");
+  console.timeEnd("GR");
+  res.send("green rabbit claimed");
   // res.write("claimed");
   // res.end;
   // res.write(cd3_claim_rplanet());
@@ -567,10 +549,6 @@ app.listen(process.env.PORT || 3000);
 // //   // res.send("claimed");
 // //   next();
 // // });
-
-// cs1_claim_rplanet();
-// cd3_claim_rplanet();
-// all_claim_greenrabbit();
 
 // let tx_message = `test\n${moment(new Date()).format(date)}`;
 // console.log(tx_message);
