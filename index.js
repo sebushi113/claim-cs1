@@ -1,7 +1,8 @@
 // const express = require("express");
 // const db = require("@cyclic.sh/dynamodb");
 import express from "express";
-import db from "@cyclic.sh/dynamodb";
+// import db from "@cyclic.sh/dynamodb";
+import db from "cyclic-dynamodb";
 
 const app = express();
 
