@@ -86,23 +86,10 @@ router.get("/search/by-ccs3_cd3d", async (req, res) => {
 // ------------------------------------
 
 // Type for new cpu4
-const Money = Record({
-  amount: Number,
-  currencyCode: String,
-});
-const PriceRange = Record({
-  minPrice: Money,
-  maxPrice: Money,
-});
 const amountData = Record({
-  ccs3_cd3d: String,
-  productType: String,
-  createdAt: String,
-  description: String,
-  vendor: String,
-  availableForSale: Boolean,
-  totalInventory: Number,
-  priceRange: PriceRange,
+  ccs3_cs1d: Number,
+  ccs3_cd3d: Number,
+  tw: Number,
 });
 
 // Post new amount
