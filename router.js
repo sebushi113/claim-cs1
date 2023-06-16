@@ -86,7 +86,7 @@ router.get("/search/by-ccs3_cd3d", async (req, res) => {
 // ------------------------------------
 
 // Type for new cpu4
-const amountData = Record({
+const amounts = Record({
   ccs3_cs1d: Number,
   ccs3_cd3d: Number,
   tw: Number,
@@ -94,7 +94,7 @@ const amountData = Record({
 
 // Post new amount
 router.post("/", authenticateUser, async (req, res) => {
-  const amountData = req.body;
+  const amounts = req.body;
 
   try {
     // Make sure amount data exists
@@ -103,10 +103,10 @@ router.post("/", authenticateUser, async (req, res) => {
     }
 
     // Make sure amount data contains all required fields
-    const amountObject = amountData.check(amountData);
+    const amountObject = amounts.check(amounts);
 
-    // Generate ccs3_cs1d and tw for amount
-    const amountId = uuidv4();
+    // Generate ccs3_cs1d, ccs3_cd3d and tw for amount
+    // const amountId = uuidv4();
     const amounttw = slugify(amountObject.ccs3_cd3d).toLocaleLowerCase();
 
     // Create full amount object
@@ -158,7 +158,7 @@ router.patch("/:ccs3_cs1d", authenticateUser, async (req, res) => {
 // Update entire amount
 router.put("/:ccs3_cs1d", authenticateUser, async (req, res) => {
   const amountId = req.params.ccs3_cs1d;
-  const amountData = req.body;
+  const amounts = req.body;
 
   try {
     // Make sure amount data exists
@@ -167,12 +167,12 @@ router.put("/:ccs3_cs1d", authenticateUser, async (req, res) => {
     }
 
     // Make sure amount has ccs3_cs1d and tw
-    if (!amountData.ccs3_cs1d || !amountData.tw) {
+    if (!amounts.ccs3_cs1d || !amounts.tw) {
       throw new Error();
     }
 
     // Make sure amount data contains all required fields
-    const amountObject = amountData.check(amountData);
+    const amountObject = amounts.check(amounts);
 
     // Delete existing amount object
     await cpu4Amounts.delete(amountId);
