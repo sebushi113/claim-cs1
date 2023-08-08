@@ -1,5 +1,5 @@
 *.env
 node_modules
 test.js
-.unused
+# .unused
 .DS_Store
